@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html xmlns:padding-left="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Rango - {% block title %}How to Tango with Django!{% endblock %}</title>
+        <!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        -->
+
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap-responsive.min.css"/>
+        <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+            <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="{% url 'index' %}">Cobalt Blue</a>
+                </div>
+                <div>
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Page 1</a></li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                  </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
+                        {% else %}
+                            <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+              </div>
+            </nav>
+
+            <div>
+                {% block body_block %}{% endblock %}
+            </div>
+
+            <hr />
+    </body>
+</html>

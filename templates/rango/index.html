@@ -1,0 +1,21 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+        {% if user.is_authenticated %}
+        <h1>Cobalt Blue says... hello {{ user.username }}! you successfully logged in... Happy Coding!!</h1>
+        {% else %}
+        <h1>Cobalt Blue says... Happy Coding!</h1>
+        {% endif %}
+        {% if categories %}
+            <ul class="list-group">
+                {% for category in categories %}
+                    <li class="list-group-item list-group-item-success"><a href="{% url 'category'  category.slug %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+        <br>
+        <a href="/rango/add_category/">Add a New Category</a><br />
+
+{% endblock %}

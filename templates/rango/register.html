@@ -1,0 +1,41 @@
+
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+        <h1>Register with Rango</h1>
+
+        {% if registered %}
+        Rango says: <strong>thank you for registering!</strong>
+        <a href="/rango/">Return to the homepage.</a><br />
+        {% else %}
+        <!-- Rango says: <strong>register here!</strong><br /> -->
+
+        <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data" class="form-horizontal" role="form">
+
+            {% csrf_token %}
+            <!-- {{ user_form.as_p }} -->
+            {% for field in user_form %}
+                <div class="form-group">
+                    <p class="control-label col-sm-2">{{ field.label_tag }}</p>
+                    <p class="col-sm-4">{{ field }}</p>
+                </div>
+            {% endfor %}
+
+            {% for field in profile_form%}
+                <div class="form-group">
+                    <p class="control-label col-sm-2">{{ field.label_tag }}</p>
+                    <p class="col-sm-4">{{ field }}</p>
+                </div>
+            {% endfor %}
+
+            <!-- {{ profile_form.as_p }} -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" name="submit" value="Register" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+{% endblock %}
